@@ -19,6 +19,15 @@ public class D005 {
 
         ArrayList<String> list = new ArrayList<>();
         spliteStr(input.toCharArray(),sb,list,0);
+        if (list.size() == 0) {
+            System.out.println(0);
+            return ;
+        }else if (list.size()>1){
+            System.out.println(-1);
+            return ;
+        } else {
+            System.out.println(list.get(0));
+        }
 
     }
 

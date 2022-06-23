@@ -28,18 +28,18 @@ public class D011 {
         String lastLine = scanner.nextLine();
 
         StringBuilder str = new StringBuilder();
-        boolean result = false;
         for (int i = 0; i < N; i++) {
              for (int j = 0; j < N; j++) {
                 if (lastLine.charAt(0) == twodim[i][j]) {
                     StringBuilder resultStr = new StringBuilder();
                     if (find(twodim, lastLine, i, j, 0, resultStr)) {
                         str = resultStr;
+                        // 最多只会有一个正常的
+                        break;
                     }
                 }
             }
         }
-
         System.out.println(str.reverse());
 
     }
@@ -51,14 +51,8 @@ public class D011 {
         if ( i >= twodim.length || j >= twodim.length || twodim[i][j] != lastLine.charAt(indexOfStr)) {
             return false;
         }
-//        twodim[i][j] += 300; // 防止该位置被重复判断
-
-        boolean result =
-//                           find(twodim, lastLine, i - 1, j, indexOfStr + 1, resultStr)
-                        find(twodim, lastLine, i + 1, j, indexOfStr + 1, resultStr)
-//                        || find(twodim, lastLine, i, j - 1, indexOfStr + 1, resultStr)
-                         || find(twodim, lastLine, i, j + 1, indexOfStr + 1, resultStr);
-//        twodim[i][j] -= 300;
+        boolean result = find(twodim, lastLine, i + 1, j, indexOfStr + 1, resultStr)
+         || find(twodim, lastLine, i, j + 1, indexOfStr + 1, resultStr);
          if (result) {
             if (indexOfStr == 0) {
                 resultStr.append(j).append(",").append(i);

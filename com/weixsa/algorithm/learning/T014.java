@@ -1,7 +1,8 @@
 package com.weixsa.algorithm.learning;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -65,18 +66,48 @@ public class T014 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int k = scanner.nextInt();
+        int k = Integer.parseInt(scanner.nextLine());
 
-        int n = scanner.nextInt();
+        int n = Integer.parseInt(scanner.nextLine());
 
-        List<String> list = new ArrayList<>();
+        // 用来存储待处理的数据
+        Map<Character,LinkedList<String>> result = new HashMap<>();
+
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < n; i++) {
-            list.add(scanner.nextLine());
+            String s = scanner.nextLine();
+            if (i == k ) {
+                sb.append(s);
+                continue;
+            }
+            char c = s.charAt(0);
+            LinkedList<String> orDefault = result.getOrDefault(c, new LinkedList<>());
+            orDefault.add(s);
+            result.put(c,orDefault);
         }
+        // 已经进行排序处理了
+        result.entrySet().forEach(x->{
+            LinkedList<String> value = x.getValue();
+            value.sort((o1, o2) -> {
+                if (o1.length() == o2.length()) {
+                    return o1.compareTo(o2);
+                }else{
+                    return o2.length() - o1.length();
+                }
+            });
+        });
 
-        list
-                
+        while (true) {
+            char c = sb.charAt(sb.length() - 1);
+            LinkedList<String> strings = result.get(c);
+            if (strings == null || strings.size() == 0) {
+                break;
+            }
+            sb.append(strings.get(0));
+            strings.remove(0);
+        }
+        System.out.println(sb);
 
     }
 }

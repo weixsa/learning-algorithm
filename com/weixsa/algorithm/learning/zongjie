@@ -1,0 +1,37 @@
+排序：
+使用数组进行排序
+ Arrays.sort(nums, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[0] == o2[0]){
+                    return o1[1] - o2[1];
+                }else{
+                    return o1[0] - o2[0];
+                }
+            }
+        });
+ 使用list进行排序
+   list.sort(new Comparator<Integer>() {
+             @Override
+             public int compare(Integer o1, Integer o2) {
+                 return 0;
+             }
+         });
+
+集合数组之间的转换
+// 集合转化为数组
+ArrayList<Integer> nums = new ArrayList<>(set);
+List<Integer> list = Arrays.stream(in.nextLine().split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+java中的字符串分隔
+\d 的含义是 [0-9]
+\D 的含义是 [^0-9]
+\w 任何一个字母数字字符（大小写均可）或下划线，等价于 [A-Za-z0-9_]
+\W 表示[^A-Za-z0-9_]
+
+
+进制和位运算
+二进制转化为十进制
+int sum = Integer.parseInt(binInt, 2);
